@@ -4,7 +4,7 @@ _Checked in: 2026-09-08 · Re-confirm at next inspection_
 ## Vehicle
 - **System:** Simple Design System (SDS) — Figma's open reference design system
   ([github.com/figma/sds](https://github.com/figma/sds)), inspected via a personal
-  learning fork (`teejay54-46/designSystem-test`).
+  learning fork.
 - **Team:** built by Figma; for scoring, framed as a **small-team system (1–3 people)**.
 - **Consumers:** none tracked — SDS is a public reference/teaching system, not deployed
   to product teams.
@@ -13,8 +13,8 @@ _Checked in: 2026-09-08 · Re-confirm at next inspection_
   deliberately on a real, reasonably mature system to see what the 10-station lens reveals.
 
 ## Assets
-- **Design library:** Figma file *"TJ - Test DS"* (`fileKey mS8PVECjURcEeLYsNZyO0u`), a
-  duplicate of the SDS Community file. Components organised by page (Buttons, Inputs, …);
+- **Design library:** a personal duplicate of the SDS Community Figma file.
+  Components organised by page (Buttons, Inputs, …);
   variants expressed as Figma component properties (`Variant` / `State` / `Size`).
 - **Code library:** React 18 + TypeScript + Vite. Package `sds@0.0.0`, `"private": true`
   — **not published, not distributed as a consumable artifact**. 28 primitives, 5
@@ -33,7 +33,7 @@ _Checked in: 2026-09-08 · Re-confirm at next inspection_
 ## Evidence access map
 | Asset | Access | Verified how |
 |---|---|---|
-| Design library | **live** | Figma MCP `get_metadata` on `mS8PVECjURcEeLYsNZyO0u` returned the Buttons page with every component variant |
+| Design library | **live** | Figma MCP `get_metadata` on the project's Figma file returned the Buttons page with every component variant |
 | Code library | **live** | Full repo is the working directory — all source readable |
 | Documentation | **live** | Storybook running at `localhost:6006`; README + 33 story files readable |
 | Process ephemera | **live (repo) / interview** | Repo artifacts readable; issue/PR tracker not sampled — the fork has no real consumer activity |

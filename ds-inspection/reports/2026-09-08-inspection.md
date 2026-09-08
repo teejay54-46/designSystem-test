@@ -36,7 +36,7 @@ _All 10 stations inspected; no station scored N/I._
 
 ## Evidence basis
 
-- Design library: **live** (Figma MCP, file `mS8PVECjURcEeLYsNZyO0u`)
+- Design library: **live** (Figma MCP against the project's Figma file)
 - Code library: **live** (full repo)
 - Docs: **live** (Storybook + repo)
 - Benchmarking: **Claude's own knowledge** (no design-systems knowledge MCP connected) — flagged per finding

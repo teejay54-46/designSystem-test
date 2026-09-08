@@ -18,9 +18,9 @@ except OrbStack and the downloaded Node image.
 2. Open **Terminal** (Applications > Utilities).
 3. Go to the project folder:
    ```
-   cd "/Users/timjohnstone/Documents/Design/AI/GitHub Demo/designSystem-test/Untitled/designSystem-test"
+   cd /path/to/designSystem-test    # wherever GitHub Desktop cloned it
    ```
-   (Tip: type `cd ` then drag the folder from Finder onto the Terminal window.)
+   (Tip: type `cd ` then drag the folder from Finder onto the Terminal window — it fills in the path.)
 4. Start it:
    ```
    ./dev.sh              # app at       http://localhost:8000
