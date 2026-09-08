@@ -14,6 +14,9 @@ dist-ssr
 .env
 .VSCodeCounter
 
+# Personal Claude Code settings — stays on this machine, not shared in the repo
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
