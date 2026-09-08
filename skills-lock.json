@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "ds-inspection": {
+      "source": "bradfrost/skills",
+      "sourceType": "github",
+      "skillPath": "skills/design-systems/ds-inspection/SKILL.md",
+      "computedHash": "895f2297d75e70ddc39c5c5bad7aff2996c5926262329b52384192a7c3b62bb8"
+    }
+  }
+}
