@@ -58,6 +58,14 @@
   }
 }
 
+/* Pressed state — applies to any button while held (react-aria fires [data-pressed]) */
+.button[data-pressed]:not([data-disabled]) {
+  box-shadow:
+    inset 0 0 0 var(--sds-size-stroke-border) var(--button-border-color),
+    var(--sds-effects-shadows-inner-shadow-100);
+  transform: translateY(var(--sds-size-depth-025));
+}
+
 .button-variant-primary {
   --button-background-color: var(--sds-color-background-brand-default);
   --button-border-color: var(--sds-color-border-brand-default);
@@ -66,25 +74,36 @@
     --button-background-color: var(--sds-color-background-brand-hover);
     --button-border-color: var(--sds-color-border-brand-default);
   }
+  &[data-pressed]:not([data-disabled]) {
+    --button-background-color: var(--sds-color-background-brand-pressed);
+  }
 }
 .button-variant-neutral {
-  --button-background-color: var(--sds-color-background-default-secondary);
+  /* aligned with the Figma component, which binds to Background/Neutral/Tertiary* */
+  --button-background-color: var(--sds-color-background-neutral-tertiary);
   --button-border-color: var(--sds-color-border-default-default);
   --button-color: var(--sds-color-text-default-default);
   &[data-hovered]:not([data-disabled]) {
+    --button-background-color: var(--sds-color-background-neutral-tertiary-hover);
+  }
+  &[data-pressed]:not([data-disabled]) {
     --button-background-color: var(
-      --sds-color-background-default-secondary-hover
+      --sds-color-background-neutral-tertiary-pressed
     );
   }
 }
 .button-variant-subtle {
   --button-background-color: transparent;
   --button-border-color: transparent;
-  --button-color: var(--sds-color-text-brand-default);
+  /* aligned with the Figma component, which binds Text/Default/Default */
+  --button-color: var(--sds-color-text-default-default);
   &[data-hovered]:not([data-disabled]) {
     --button-background-color: var(
       --sds-color-background-default-default-hover
     );
+  }
+  &[data-pressed]:not([data-disabled]) {
+    --button-background-color: var(--sds-color-background-default-tertiary);
   }
 }
 
@@ -96,12 +115,21 @@
     --button-background-color: var(--sds-color-background-danger-hover);
     --button-border-color: var(--sds-color-border-danger-default);
   }
+  &[data-pressed]:not([data-disabled]) {
+    --button-background-color: var(--sds-color-background-danger-hover);
+    --button-border-color: var(--sds-color-border-danger-default);
+  }
 }
 .button-variant-danger-subtle {
   --button-background-color: transparent;
   --button-border-color: transparent;
   --button-color: var(--sds-color-text-danger-default);
   &[data-hovered]:not([data-disabled]) {
+    --button-background-color: var(
+      --sds-color-background-danger-tertiary-hover
+    );
+  }
+  &[data-pressed]:not([data-disabled]) {
     --button-background-color: var(
       --sds-color-background-danger-tertiary-hover
     );
