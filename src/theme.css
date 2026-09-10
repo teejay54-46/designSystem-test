@@ -98,6 +98,8 @@
 :root {
   --sds-color-background-brand-default: var(--sds-color-brand-800);
   --sds-color-background-brand-hover: var(--sds-color-brand-900);
+  /* pressed tokens hand-added — Figma vars exist (Background/Brand/Pressed, Background/Neutral/Tertiary Pressed) but this file's plan can't sync multi-mode variables; see add-button-pressed branch */
+  --sds-color-background-brand-pressed: var(--sds-color-brand-1000);
   --sds-color-background-brand-secondary: var(--sds-color-brand-200);
   --sds-color-background-brand-secondary-hover: var(--sds-color-brand-300);
   --sds-color-background-brand-tertiary: var(--sds-color-brand-100);
@@ -121,6 +123,7 @@
   --sds-color-background-neutral-secondary-hover: var(--sds-color-slate-400);
   --sds-color-background-neutral-tertiary: var(--sds-color-slate-200);
   --sds-color-background-neutral-tertiary-hover: var(--sds-color-slate-300);
+  --sds-color-background-neutral-tertiary-pressed: var(--sds-color-slate-400);
   --sds-color-background-positive-default: var(--sds-color-green-500);
   --sds-color-background-positive-hover: var(--sds-color-green-600);
   --sds-color-background-positive-secondary: var(--sds-color-green-200);
@@ -238,6 +241,8 @@
   :root {
     --sds-color-background-brand-default: var(--sds-color-brand-100);
     --sds-color-background-brand-hover: var(--sds-color-brand-300);
+    /* pressed tokens hand-added (dark mode) — see note in the light block above */
+    --sds-color-background-brand-pressed: var(--sds-color-brand-500);
     --sds-color-background-brand-secondary: var(--sds-color-brand-600);
     --sds-color-background-brand-secondary-hover: var(--sds-color-brand-500);
     --sds-color-background-brand-tertiary: var(--sds-color-brand-600);
@@ -261,6 +266,7 @@
     --sds-color-background-neutral-secondary-hover: var(--sds-color-slate-1000);
     --sds-color-background-neutral-tertiary: var(--sds-color-slate-900);
     --sds-color-background-neutral-tertiary-hover: var(--sds-color-slate-1000);
+    --sds-color-background-neutral-tertiary-pressed: var(--sds-color-slate-1000);
     --sds-color-background-positive-default: var(--sds-color-green-700);
     --sds-color-background-positive-hover: var(--sds-color-green-800);
     --sds-color-background-positive-secondary: var(--sds-color-green-800);
