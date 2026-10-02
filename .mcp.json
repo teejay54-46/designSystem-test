@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "figma-console": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "export ENABLE_MCP_APPS=true; set -a; . \"/Users/timjohnstone/Documents/Design/AI/GitHub Demo/designSystem-test/Untitled/designSystem-test/.env.figma-console-mcp\"; set +a; exec npx -y figma-console-mcp@latest"
+      ]
+    }
+  }
+}

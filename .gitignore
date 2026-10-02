@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+.env.figma-console-mcp
 .VSCodeCounter
 
 # Personal Claude Code settings — stays on this machine, not shared in the repo
