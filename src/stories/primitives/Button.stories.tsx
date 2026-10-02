@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, fireEvent, within } from "@storybook/test";
+import { expect, fireEvent, userEvent, within } from "@storybook/test";
 import { IconActivity, IconArrowLeft } from "icons";
 import { Button, ButtonDanger, ButtonGroup } from "primitives";
 
@@ -80,6 +80,52 @@ export const StoryButtonPressed: StoryObj<typeof Button> = {
     await expect(primaryBtn).toHaveAttribute("data-pressed", "true");
     fireEvent.keyUp(primaryBtn, { key: " ", code: "Space" });
     await expect(primaryBtn).not.toHaveAttribute("data-pressed");
+  },
+};
+
+export const StoryButtonFocused: StoryObj<typeof Button> = {
+  name: "Button Focused (state)",
+  args: {
+    children: "Hello world",
+  },
+  argTypes: {
+    children: { control: { type: "text" } },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Focused is a **state**, not a variant — there is no `variant=\"focused\"`. " +
+          "Every Button shows a 2px focus ring (`Border/Focus/Default`), set 2px " +
+          "outside the button, via `[data-focus-visible]` when it receives keyboard " +
+          "focus, matching the Figma `State=Focused` components (Primary, Medium and " +
+          "Small). Press Tab to move focus between the buttons below.",
+      },
+    },
+  },
+  render: ({ children, ...props }) => (
+    <ButtonGroup>
+      <Button {...props} variant="primary" size="medium">
+        {children}
+      </Button>
+      <Button {...props} variant="primary" size="small">
+        {children}
+      </Button>
+    </ButtonGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [mediumBtn, smallBtn] = canvas.getAllByRole("button");
+
+    // react-aria only sets [data-focus-visible] for keyboard focus, so tab in
+    // rather than calling .focus() (which would count as pointer focus).
+    await userEvent.tab();
+    await expect(mediumBtn).toHaveAttribute("data-focus-visible", "true");
+    await userEvent.tab();
+    await expect(smallBtn).toHaveAttribute("data-focus-visible", "true");
+    await expect(mediumBtn).not.toHaveAttribute("data-focus-visible");
+    await userEvent.tab({ shift: true });
+    await expect(mediumBtn).toHaveAttribute("data-focus-visible", "true");
   },
 };
 

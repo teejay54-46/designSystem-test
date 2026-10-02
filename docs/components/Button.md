@@ -44,12 +44,13 @@ Destructive actions do **not** use a `Variant` here — use the separate
 | `Default` | — | resting |
 | `Hover` | runtime (`[data-hovered]`) | background steps one shade darker |
 | `Pressed` | runtime (`[data-pressed]`) | background steps darker again + inner shadow (`Effects/Shadows/Inner Shadow 100`) + 1px downward offset (`Size/Depth/025`) |
+| `Focused` | runtime (`[data-focus-visible]`) | keyboard focus only: a 2px ring (`Stroke/Focus Ring`) in `Border/Focus/Default`, drawn 2px outside the button with a matching rounded corner; the fill and border do not change |
 | `Disabled` | **`isDisabled` prop** | greyed, `pointer-events: none`, removed from tab order, announced as disabled |
 
-`Hover` and `Pressed` are **visual states only** — react-aria sets them at
-runtime. They are not props and not mapped in Code Connect.
-Keyboard focus shows a separate focus ring (`[data-focus-visible]`), not a
-`State` value.
+`Hover`, `Pressed` and `Focused` are **visual states only** — react-aria sets
+them at runtime. They are not props and not mapped in Code Connect.
+`Focused` is currently modelled in Figma for the **Primary** variant only
+(Medium and Small); Neutral and Subtle use the same ring in code.
 
 ### `Size`
 
@@ -94,10 +95,14 @@ All values are semantic tokens — **no hardcoded colours, spacing, or radii**.
 | **Disabled** (any variant) | `Background/Disabled/Default` | `Border/Disabled/Default` | `Text/Disabled/Default` |
 
 Shared: radius `Size/Radius/200` · border `Size/Stroke/Border` · gap `Size/Space/200`
-· pressed inner shadow `Effects/Shadows/Inner Shadow 100` · pressed offset `Size/Depth/025`.
+· pressed inner shadow `Effects/Shadows/Inner Shadow 100` · pressed offset `Size/Depth/025`
+· focus ring colour `Border/Focus/Default` · focus ring thickness `Stroke/Focus Ring`.
 
 `Background/Brand/Pressed` and `Background/Neutral/Tertiary Pressed` are aliases
 of `Brand/1000`→`Brand/500` and `Slate/400`→`Slate/1000` (SDS Light → SDS Dark).
+
+`Border/Focus/Default` is `#006AFF` in both SDS Light and SDS Dark (CSS:
+`--sds-color-border-focus-default`, which feeds `--global-focus-ring-color`).
 
 ---
 
@@ -139,7 +144,7 @@ of `Brand/1000`→`Brand/500` and `Slate/400`→`Slate/1000` (SDS Light → SDS 
 | `Variant` (Primary / Neutral / Subtle) | `variant` |
 | `Size = Small` | `size="small"` (Medium is the default, omitted) |
 | `State = Disabled` | `isDisabled` |
-| `State = Hover` / `Pressed` | *not mapped — runtime visual states* |
+| `State = Hover` / `Pressed` / `Focused` | *not mapped — runtime visual states* |
 | `Has Icon Start` + `Icon Start` | leading child |
 | `Has Icon End` + `Icon End` | trailing child |
 | `Label` | text child |
