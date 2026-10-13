@@ -106,6 +106,34 @@ of `Brand/1000`→`Brand/500` and `Slate/400`→`Slate/1000` (SDS Light → SDS 
 
 ---
 
+## Contentful
+
+Editors control the Button through the Contentful `button` content type. Field
+names match Figma and code wherever they exist.
+
+| Contentful field | Rules | Figma property | Code |
+|------------------|-------|----------------|------|
+| `label` (Label) | required, localised, max 30 characters | `Label` | `children` |
+| `href` (Link) | required; `https://`, `/path`, `mailto:` or `tel:` only | none (documented here) | `href` |
+| `variant` | required; `primary`, `neutral`, `subtle` | `Variant` | `variant` |
+| `size` | required; `medium`, `small` | `Size` | `size` |
+| `iconStart`, `iconEnd` | optional; one of 8 icons (`arrow-left`, `arrow-right`, `chevron-left`, `chevron-right`, `check`, `plus`, `external-link`, `download`); blank = no icon | `Has Icon Start/End` + `Icon Start/End` | leading / trailing icon children |
+
+Not exposed to editors: `State` (Hover, Pressed, Focused, Disabled), `isDisabled`,
+`onPress`, `type`, colours and spacing.
+
+- **Mapping:** `contentfulButtonToProps(entry)` in
+  `src/ui/primitives/Button/contentful.tsx` turns an entry into Button props. Import
+  it directly, not through the `primitives` barrel (that creates a circular import
+  with `icons`).
+- **Long labels:** the Button has a max width of 275px (`17.1875rem`, border-box,
+  matching Figma) and truncates the label with an ellipsis. The 30 character limit
+  is the real control; truncation is the safety net.
+- **Story:** "Button from Contentful (shaped data)" shows typical and edge-case
+  entries.
+
+---
+
 ## Usage rules
 
 - **Do** use exactly one `Primary` button per view or discrete section.

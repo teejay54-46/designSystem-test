@@ -4,6 +4,16 @@ import { Button as RACButton, Link as RACLink } from "react-aria-components";
 import { type AnchorOrButtonProps } from "utils";
 import "./button.css";
 
+function withTruncatableLabel(children: React.ReactNode) {
+  return React.Children.map(children, (child) =>
+    typeof child === "string" || typeof child === "number" ? (
+      <span className="button-label">{child}</span>
+    ) : (
+      child
+    ),
+  );
+}
+
 export type ButtonProps = Omit<ButtonBaseProps, "variant"> & {
   variant?: Exclude<
     ButtonBaseProps["variant"],
@@ -29,7 +39,7 @@ export const Button = React.forwardRef(function Button(
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
-      {props.children}
+      {withTruncatableLabel(props.children)}
     </RACLink>
   ) : (
     <RACButton
@@ -37,7 +47,7 @@ export const Button = React.forwardRef(function Button(
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
-      {props.children}
+      {withTruncatableLabel(props.children)}
     </RACButton>
   );
 });
@@ -75,7 +85,7 @@ export const ButtonDanger = React.forwardRef(function Button(
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
-      {props.children}
+      {withTruncatableLabel(props.children)}
     </RACLink>
   ) : (
     <RACButton
@@ -83,7 +93,7 @@ export const ButtonDanger = React.forwardRef(function Button(
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
-      {props.children}
+      {withTruncatableLabel(props.children)}
     </RACButton>
   );
 });
