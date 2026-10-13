@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fireEvent, userEvent, within } from "@storybook/test";
 import { IconActivity, IconArrowLeft } from "icons";
 import { Button, ButtonDanger, ButtonGroup } from "primitives";
+import {
+  contentfulButtonToProps,
+  type ContentfulButtonEntry,
+} from "../../ui/primitives/Button/contentful";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -126,6 +130,144 @@ export const StoryButtonFocused: StoryObj<typeof Button> = {
     await expect(mediumBtn).not.toHaveAttribute("data-focus-visible");
     await userEvent.tab({ shift: true });
     await expect(mediumBtn).toHaveAttribute("data-focus-visible", "true");
+  },
+};
+
+const contentfulButtonExamples: { note: string; entry: ContentfulButtonEntry }[] =
+  [
+    {
+      note: "Typical: primary, medium, icon at the start",
+      entry: {
+        sys: { id: "button-typical" },
+        fields: {
+          label: "Add to basket",
+          href: "/basket",
+          variant: "primary",
+          size: "medium",
+          iconStart: "plus",
+        },
+      },
+    },
+    {
+      note: "Edge case: label at the 30 character limit",
+      entry: {
+        sys: { id: "button-max-length" },
+        fields: {
+          label: "Subscribe to our wine club now",
+          href: "/wine-club",
+          variant: "primary",
+          size: "medium",
+        },
+      },
+    },
+    {
+      note: "Neutral, small, icon at the end",
+      entry: {
+        sys: { id: "button-neutral-small" },
+        fields: {
+          label: "Delivery information",
+          href: "/delivery",
+          variant: "neutral",
+          size: "small",
+          iconEnd: "chevron-right",
+        },
+      },
+    },
+    {
+      note: "Subtle, external link icon",
+      entry: {
+        sys: { id: "button-subtle-external" },
+        fields: {
+          label: "Read our full story",
+          href: "https://www.example.com/about",
+          variant: "subtle",
+          size: "medium",
+          iconEnd: "external-link",
+        },
+      },
+    },
+    {
+      note: "Edge case: no icons, mailto link",
+      entry: {
+        sys: { id: "button-mailto" },
+        fields: {
+          label: "Email us",
+          href: "mailto:hello@example.com",
+          variant: "neutral",
+          size: "medium",
+        },
+      },
+    },
+    {
+      note: "Edge case: over-limit label that slipped past validation (truncates)",
+      entry: {
+        sys: { id: "button-over-limit" },
+        fields: {
+          label:
+            "A label that slipped past the 30 character validation and keeps going",
+          href: "/oops",
+          variant: "primary",
+          size: "medium",
+          iconStart: "arrow-left",
+        },
+      },
+    },
+  ];
+
+export const StoryButtonContentful: StoryObj<typeof Button> = {
+  name: "Button from Contentful (shaped data)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Buttons built from entries shaped like the Contentful `button` content " +
+          "type (`label`, `href`, `variant`, `size`, `iconStart`, `iconEnd`) via " +
+          "`contentfulButtonToProps`. Includes edge cases: a label at the 30 " +
+          "character limit, no icons, and an over-limit label that truncates at " +
+          "the 275px max width.",
+      },
+    },
+  },
+  render: () => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.5rem",
+        alignItems: "flex-start",
+      }}
+    >
+      {contentfulButtonExamples.map(({ note, entry }) => (
+        <div
+          key={entry.sys.id}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            alignItems: "flex-start",
+          }}
+        >
+          <small>{note}</small>
+          <Button {...contentfulButtonToProps(entry)} />
+        </div>
+      ))}
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const links = canvas.getAllByRole("link");
+    const labelOf = (link: HTMLElement) =>
+      link.querySelector<HTMLElement>(".button-label")!;
+
+    const typical = labelOf(links[0]);
+    await expect(typical.scrollWidth).toBeLessThanOrEqual(typical.clientWidth);
+
+    const overLimit = labelOf(links[links.length - 1]);
+    await expect(overLimit.scrollWidth).toBeGreaterThan(overLimit.clientWidth);
+
+    for (const link of links) {
+      await expect(link.getBoundingClientRect().width).toBeLessThanOrEqual(275);
+    }
   },
 };
 

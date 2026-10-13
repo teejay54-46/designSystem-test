@@ -4,6 +4,7 @@
   box-shadow: inset 0 0 0 var(--sds-size-stroke-border)
     var(--button-border-color);
   border-radius: var(--border-radius);
+  box-sizing: border-box;
   background: var(--button-background-color);
   color: var(--button-color);
   cursor: pointer;
@@ -12,13 +13,21 @@
   gap: var(--sds-size-space-200);
   justify-content: center;
   line-height: 1;
+  max-width: 17.1875rem; /* 275px, matches the Figma Button max width */
   padding: var(--button-padding-y) var(--button-padding-x);
   position: relative;
   white-space: nowrap;
 
   > .icon {
     --icon-color: var(--button-color);
+    flex-shrink: 0;
   }
+}
+
+.button-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .button-size-small {
